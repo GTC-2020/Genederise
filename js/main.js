@@ -15,15 +15,18 @@ let outputField =document.querySelector('.output').querySelector('p');
     const serverUrl = 'https://api.genderize.io';
     const url = `${serverUrl}?name=${firstName}`;
 
-    let response = await fetch(url);
+    let response =  fetch(url);
 
-    let  gender = await response.json();
-     outputField.textContent = `${firstName}-${gender.gender}`;
+    let  jsonInput = response.then(response => response.json());
+    jsonInput.then(jsonInput => {
+        outputField.textContent =`${firstName}-${jsonInput.gender}`});
+    
 }
 
 
 buttonSearch.addEventListener('click', async function(){
     getGender();
+
 })
 
 
